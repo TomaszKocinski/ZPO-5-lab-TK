@@ -25,6 +25,10 @@ public:
 		return temp;
 	}
 };
+class nextstack:public exception{
+public:
+	nextstack(){}
+};
 
 template<typename T, int rozmiar>
 class SzablonStosu{ 
@@ -33,21 +37,13 @@ class SzablonStosu{
 public:
 	SzablonStosu() : top(0) {}
 	void push(const T& i) {
-		try{
-			if(top==rozmiar)
-				throw pierwszy(top);
-		}catch(pierwszy arg){
-			cout<<arg.blad();
-		}
+		if(top==rozmiar)
+			throw pierwszy(top);
 		stos[top++] = i;
 	}
 	T pop() {
-		try{
-			if(top==0)
-				throw pierwszy(top);
-		}catch(pierwszy arg){
-			cout<<arg.blad2();
-		}
+		if(top==0)
+			throw pierwszy(top);
 		return stos[--top];
 	}
 };
@@ -56,14 +52,18 @@ class SzablonSprytnegoStosu {
 	SzablonStosu<T, rozmiar> *sp;
 public:
 	SzablonSprytnegoStosu<T,rozmiar> *nast;
-
+	SzablonSprytnegoStosu<T,rozmiar> *poprz;
 	SzablonSprytnegoStosu (): sp(0), nast(0) { };
 	void push(const T& i) {
-		try{
-		}
+
 		if (!sp) 
 			sp = new SzablonStosu<T,rozmiar>;
-		sp->push(i);
+		try{
+			sp->push(i);
+		}catch(pierwszy arg){
+			cout<<arg.blad();
+			throw nextstack();
+		}
 	};
 	T pop() {
 		if (sp)
@@ -80,6 +80,7 @@ class KontenerStos {
 public:
 	KontenerStos(): wsk(0) {
 		glowa = new SzablonSprytnegoStosu<T,rozmiar>;
+		wsk=glowa;
 	};
 	~KontenerStos() {
 		wsk=glowa;
@@ -90,20 +91,24 @@ public:
 		delete glowa;
 	};
 	void push(const T& i) {
-
-		// ... 
+		try{
+			wsk->push(i);
+		}
+		catch(...){
+			wsk=wsk->nast;
+			wsk=new SzablonSprytnegoStosu<T,rozmiar>;
+		}
 	};
 	T pop() {
-		// ...
-		return T(); // ta linijka to "zaœlepka"
+		return wsk->pop(); // ta linijka to "zaœlepka"
 	};
 };
 int main() {
 
-	//KontenerStos<string,100> K;
-	SzablonStosu<string,100> K;
+	KontenerStos<string,3> K;
+	//SzablonStosu<string,100> K;
 	ifstream fi("qv.txt");
-	K.pop();
+
 	// zape³nianie stosu
 	string s;
 	while (fi) {
