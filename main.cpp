@@ -12,23 +12,22 @@ public:
 	}
 	string blad(){
 		string temp;
-		temp+="siema jest blad, rozmiar jest ";
+		temp+="siema jest blad, rozmiar jest";
 		temp+=amount;
-		temp+="za pewne zostal on przepelniony";
+		temp+="za pewne zostal on przepelniony\n";
 		return temp;
 	}
 	string blad2(){
 		string temp;
-		temp+="siema jest blad, rozmiar jest ";
+		temp+="siema jest blad, rozmiar jest";
 		temp+=amount;
-		temp+="pewnie probowales wyjmowac z pustego stosu";
+		temp+="pewnie probowales wyjmowac z pustego stosu\n";
 		return temp;
 	}
 };
-class nextstack:public exception{
-public:
-	nextstack(){}
-};
+class nextstack:public exception{public:nextstack(){}};
+class closestack:public exception{public:closestack(){}};
+class koniec:public exception{public:koniec(){}};
 
 template<typename T, int rozmiar>
 class SzablonStosu{ 
@@ -53,9 +52,8 @@ class SzablonSprytnegoStosu {
 public:
 	SzablonSprytnegoStosu<T,rozmiar> *nast;
 	SzablonSprytnegoStosu<T,rozmiar> *poprz;
-	SzablonSprytnegoStosu (): sp(0), nast(0) { };
+	SzablonSprytnegoStosu (): sp(0), nast(0), poprz(0) { };
 	void push(const T& i) {
-
 		if (!sp) 
 			sp = new SzablonStosu<T,rozmiar>;
 		try{
@@ -66,8 +64,14 @@ public:
 		}
 	};
 	T pop() {
-		if (sp)
-			return sp->pop();
+		try{
+			if (sp)
+				return sp->pop();
+		}
+		catch(pierwszy arg){
+			cout<<arg.blad2();
+			throw closestack();
+		}
 	};
 	~SzablonSprytnegoStosu() {      
 		delete sp; 
@@ -94,34 +98,58 @@ public:
 		try{
 			wsk->push(i);
 		}
-		catch(...){
+		catch(nextstack){
+			wsk->nast=new SzablonSprytnegoStosu<T,rozmiar>;
+			wsk->nast->poprz=wsk;
 			wsk=wsk->nast;
-			wsk=new SzablonSprytnegoStosu<T,rozmiar>;
+			wsk->push(i);
 		}
 	};
 	T pop() {
-		return wsk->pop(); // ta linijka to "zaœlepka"
+		try{
+			wsk->pop();
+		}
+		catch(closestack){
+			if(wsk->poprz){
+				wsk=wsk->poprz;
+				delete wsk->nast;
+				wsk->nast=0;
+				wsk->pop();
+			}else{
+				cout<<"probujesz pop przy pustym pustym stosie\n";
+				throw koniec();
+			}
+		}
+		return T(); 
 	};
 };
 int main() {
-
 	KontenerStos<string,3> K;
-	//SzablonStosu<string,100> K;
 	ifstream fi("qv.txt");
-
-	// zape³nianie stosu
-	string s;
-	while (fi) {
-		fi >> s; 
-		K.push(s);
-		fi.seekg(ios::beg);
-		fi.clear();
-	};
-
-	// opró¿nianie stosu
+	string s,t;
+	try {
+		while (fi) {
+			fi >> s;
+			t+=s;
+			K.push(t);
+			fi.seekg(ios::beg);
+			fi.clear();
+		}
+	}
+	catch (std::bad_alloc &ba) {
+		cout << "bad_alloc caught: " << ba.what() << endl;
+		cout << "Press ENTER to continue" << endl;
+		cin.ignore();
+	}
+ 
+	fi.seekg(ios::beg);
+	fi.clear();
 	while (true)
-		K.pop();
-
+		try{K.pop();
+	}
+	catch(...){
+		break;
+	}
 	system("pause");
 	return 0;
 }
