@@ -1,0 +1,123 @@
+>>0<<
+0: Kara
+1: Kiedy
+2: wielki
+3: mistrz
+4: Mustafa,
+5: Krzyżaków,
+>>1<<
+0: z
+1: na
+2: Alpy
+3: szedł
+4: przez
+5: zastępy
+6: Kraków,
+7: licznymi
+>>2<<
+0: do
+1: swych
+2: posad
+3: będąc
+4: skory
+5: obrony
+6: zawsze
+>>3<<
+0: go
+1: pod
+2: król
+3: pobił
+4: Stefan
+5: Batory.
+6: Grunwaldem
+>>4<<
+0: w
+1: to
+2: owym
+3: Wtedy
+4: wśród
+5: kraju
+6: futer
+7: Sahary,
+>>5<<
+0: nową
+1: Luter
+2: sławny
+3: Marcin
+4: religię
+5: Szczepił
+>>6<<
+0: i
+1: i,
+2: piórem
+3: wymową,
+4: pracując
+5: gorliwie
+>>7<<
+0: z
+1: w
+2: noc
+3: razem
+4: zginął
+5: Homerem
+6: Bartłomiejową.
+>>8<<
+0: W
+1: to
+2: na
+3: tym
+4: czasie
+5: wojażer
+6: Kopernik,
+7: Wschodzie
+>>9<<
+0: i
+1: na
+2: robił
+3: świeże
+4: lądzie
+5: wodzie;
+6: odkrycia
+>>10<<
+0: i
+1: Azję
+2: Afrykę,
+3: fraktówką
+4: Objechawszy
+>>11<<
+0: po
+1: odkrył
+2: podróży
+3: tygodniu
+4: Amerykę.
+>>12<<
+0: go
+1: wysp
+2: wreszcie
+3: Mieszkańcy
+4: schwytawszy
+5: Sandwichskich,
+>>13<<
+0: w
+1: a
+2: w
+3: zabili
+4: uwięzili
+5: Peszcie.
+6: Sztokholmie,
+>>14<<
+0: od
+1: do
+2: Wtem
+3: Saula
+4: goniec
+5: przybył
+6: papieża
+>>15<<
+0: i
+1: na
+2: wojnom
+3: miesiąc
+4: położył
+5: koniec.
+6: wszystkim
