@@ -14,6 +14,7 @@ public:
 	OC() {};
 	void write(std::ostream& out = std::cout);
 	void execute();
+	~OC();
 };
 struct GS {
 	bool operator() (const std::string&, const std::string&) const;

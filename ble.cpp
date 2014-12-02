@@ -47,6 +47,18 @@ void OC::execute(){
 		(*w).sort(GS());
 	}
 }
+OC::~OC(){
+	cout<<"siemahh";
+	vector::~vector();
+	cout<<"shh";
+
+	/// tak jak na dole jest chujowo, bo tylko element listy sie usuwaja, a potem jak sie chce wywolac destruktor wektora to jest blad bo chce jeszcze raz liste wywalic i ma blad dostepu
+	/*iterator w=begin();
+	list<string>::iterator ite=(*w).begin();;
+	for(int i=0;w!=end();w++){
+		(*w).~list();
+	}*/
+}
 bool GS::operator()(const std::string& x, const std::string& y) const {
 	return x.size()<y.size();
 };
