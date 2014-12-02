@@ -13,17 +13,24 @@ void OC::open(const char* filename) {
 	string line;
 	int i=1;
 	
+
 	this->resize(1);
 	this->reserve(100000);
+	iterator w=begin();
 
-	for(iterator w=begin();getline(in, line);w++){
+	while(getline(in, line)){
+		if(line==""){ 
+			continue;
+		}
 		this->resize(i++);
 		istringstream iss(line);
 		string word;
 		while(iss >> word) {
-			(*w).emplace_back(word);
+			(*w).push_back(word);
 		}
+		w++;
 	}
+	w--;
 };
 void OC::write(ostream& out) {
 	int i=0;
@@ -41,5 +48,5 @@ void OC::execute(){
 	}
 }
 bool GS::operator()(const std::string& x, const std::string& y) const {
-		return x.size()<y.size();
+	return x.size()<y.size();
 };
