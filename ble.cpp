@@ -5,6 +5,7 @@
 #include<vector>
 #include<list>
 #include<iterator>
+#include<windows.h>
 #include "ble.h"
 using namespace std;
 
